@@ -352,10 +352,44 @@
             </objects>
             <point key="canvasLocation" x="-630.46875" y="-271.09375"/>
         </scene>
+        <!--Match Collection View Controller-->
+        <scene sceneID="4JF-6T-zrv">
+            <objects>
+                <collectionViewController storyboardIdentifier="initialView" id="Evk-gd-nt5" customClass="MatchCollectionViewController" customModule="JScout" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="aSL-il-GVT">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QbF-Ze-etu">
+                            <size key="itemSize" width="163" height="193"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="uJp-fL-aOT">
+                                <rect key="frame" x="0.0" y="0.0" width="163" height="193"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="163" height="193"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Evk-gd-nt5" id="b4V-xq-9De"/>
+                            <outlet property="delegate" destination="Evk-gd-nt5" id="bMR-Wn-z3p"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Das-7y-cqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12.890625" y="-271.09375"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="9w7-bA-gRA">
             <objects>
-                <viewController storyboardIdentifier="initialView" id="rFf-Zr-Ili" customClass="ViewController" customModule="JScout" sceneMemberID="viewController">
+                <viewController id="rFf-Zr-Ili" customClass="ViewController" customModule="JScout" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TVh-fy-NH7">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -434,7 +468,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1f0-XO-J7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="123.63281249999999" y="-22.65625"/>
+            <point key="canvasLocation" x="684" y="-250"/>
         </scene>
     </scenes>
     <resources>
