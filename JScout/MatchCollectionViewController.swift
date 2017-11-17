@@ -12,6 +12,7 @@ import Firebase
 private let reuseIdentifier = "Cell"
 
 var numberOfMatchesInView = 0
+var matches = [String]()
 
 
 private let userID = Auth.auth().currentUser?.uid
@@ -55,21 +56,18 @@ class MatchCollectionViewController: UICollectionViewController {
     //// FUNCTIONS -------------------------------------
     func getNumberOfMatches() {
         
-        thisUserRef.observe(.value, with: {
-            snapshot in
-            var matchCount = [String]()
+        thisUserRef.observe(.value, with: {  snapshot in
+            
+            var tempMatches = [String]()
             for match in snapshot.children {
-                matchCount.append((match as AnyObject).key)
-                numberOfMatchesInView = matchCount.count
+                tempMatches.append((match as AnyObject).key)
             }
-            print(matchCount)
-            
-            
-            self.collectionView!.reloadData()
+            DispatchQueue.main.async{
+                matches = tempMatches
+//                self.collectionView?.selectItem(at:IndexPath(item:1, section:0), animated:true, scrollPosition:.bottom)
+                self.collectionView!.reloadData()
+            }
         })
-        print("------after for")
-        print(numberOfMatchesInView)
-        collectionView?.reloadData()
     }
     
     
@@ -130,8 +128,14 @@ class MatchCollectionViewController: UICollectionViewController {
         
     }
     
+    
+    
+    
     //// END OF FUNCTIONS -------------------------------------
     
+    
+    
+   
     
     // MARK: UICollectionViewDataSource
     
@@ -149,7 +153,7 @@ class MatchCollectionViewController: UICollectionViewController {
         
         
         
-        return numberOfMatchesInView
+        return matches.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -166,6 +170,9 @@ class MatchCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         /// Handle The Taps
+       
+        
+        
         
         print("You selected cell #\(indexPath.item)!")
     }

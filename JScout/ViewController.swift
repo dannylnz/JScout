@@ -26,9 +26,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var tableViewA: UITableView!
     @IBOutlet weak var tableViewB: UITableView!
     
+    @IBOutlet weak var teamANameLabel: UILabel!
     
+    var matchId = ""
+    var teamAname = ""
     
     //End Of Outlets-------------------------------------------------------------------------
+    
+   
+    
     
     
     // Func ---------------------------------------------------------------------------------------------

@@ -41,6 +41,25 @@ class PopUpViewController: UIViewController {
     //// End of Outlets & Var
     
     
+    //Func Prepare
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let matchVC = segue.destination as! ViewController
+        
+        matchVC.teamAname = teamATextField.text!
+    }
+    
+    
+    func presentMatchVC() {
+        
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "matchVC") as? ViewController
+        {
+            
+            present(vc, animated: true, completion: nil)
+        }
+    }
+ 
+    
     
     /// Functions
 
@@ -63,18 +82,22 @@ class PopUpViewController: UIViewController {
             ] as [String : Any]
         
         
-        
-        
         thisUserRef.childByAutoId().setValue(newMatch)
+        print("new Match added")
         
-
+        
+       
+        
+     
+        
+        presentMatchVC()
         
         /// Set names and location, date to match view controller
         
         //Go To Match View Controller
         
         
-        print("new Match added")
+        
         
     }
     
@@ -99,4 +122,7 @@ class PopUpViewController: UIViewController {
 
 }
 
+
 }
+
+
