@@ -10,16 +10,16 @@ import Foundation
 
 class match {
     
-    
-    
     var teamA = ""
     var teamB = ""
     var location = ""
     var date = ""
     
-    var ppp = [String:AnyObject]()
-    
-    
-    
+    var newMatch = [
+        "team A Name": "" ,
+        "team B Name": "",
+        "date": "",
+        "location": ""
+        ] as [String : Any]
     
 }

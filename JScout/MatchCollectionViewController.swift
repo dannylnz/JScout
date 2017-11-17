@@ -28,7 +28,7 @@ class MatchCollectionViewController: UICollectionViewController {
     
     
     /// Outlets and Vars
-     var countOfMatch = [match]()
+    var countOfMatch = [match]()
     
     var items = ["1", "2", "3"]
     
@@ -69,31 +69,20 @@ class MatchCollectionViewController: UICollectionViewController {
         
     
     
-    
-    @objc func addNewMatch() {
+    func presentPopUp() {
         
-        let userID = Auth.auth().currentUser?.uid
-        let usersRef = Database.database().reference().child("users")
-        let thisUserRef = usersRef.child(userID!).child("matches")
-        
-        let newMatch = [
-            "team A Name": "teamAName" ,
-            "team B Name": "teamBName",
-            "date":"date",
-            "location": "location"
-            ] as [String : Any]
-        
-        
-        thisUserRef.childByAutoId().setValue(newMatch)
-        
-        
-        print("new Match added")
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PopUpVC") as? PopUpViewController
+        {
+            
+            present(vc, animated: true, completion: nil)
+        }
     }
     
     
-    
-    
-    
+    @objc func addNewMatch() {
+        
+        presentPopUp()
+    }
     
     
     
