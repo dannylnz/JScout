@@ -9,8 +9,15 @@
 import UIKit
 import Firebase
 
+
+let matchVC = ViewController()
+
+
 class PopUpViewController: UIViewController {
 
+    
+    
+    
     @IBOutlet weak var popUpLayer: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +62,12 @@ class PopUpViewController: UIViewController {
             "location": locationTextField.text!
             ] as [String : Any]
         
+        
+        
+        
         thisUserRef.childByAutoId().setValue(newMatch)
         
-        
-        /// Append match to array for cell counting
+
         
         /// Set names and location, date to match view controller
         
@@ -70,7 +79,24 @@ class PopUpViewController: UIViewController {
     }
     
     
-    
-    
-    
+    func fetchEntireListOfmatch() {
+        
+        let userID = Auth.auth().currentUser?.uid
+        let usersRef = Database.database().reference().child("users")
+        let thisUserRef = usersRef.child(userID!).child("matches")
+        
+        thisUserRef.observe(.childAdded) { (snapshot) in
+            var listOfMatch = [DataSnapshot]()
+            
+            for item in snapshot.children {
+                listOfMatch.append(item as! DataSnapshot)
+                
+        
+    }
+
+            
+}
+
+}
+
 }
