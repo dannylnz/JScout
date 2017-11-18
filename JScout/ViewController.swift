@@ -12,6 +12,23 @@ import Firebase
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     // ViewDidLoad - WillAppear-----------------------------------------------------------------------------
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // date
+        
+        dateLabel.text = match["date"] as? String
+        
+        // location
+        
+        locationLabel.text = match["location"] as? String
+        
+        // team A Name
+        
+        teamANameLabel.text = match["team A Name"] as? String
+        
+        // team B Name
+        
+        teamBNameLabel.text = match["team B Name"] as? String
         
     }
     
@@ -27,10 +44,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var tableViewB: UITableView!
     
     @IBOutlet weak var teamANameLabel: UILabel!
+    @IBOutlet weak var teamBNameLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     var matchId = ""
     var teamAname = ""
+    var match = [String:Any]()
     
+    @IBAction func backBtn(_ sender: Any) {
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "initialView") as? MatchCollectionViewController
+        {
+            
+            present(vc, animated: true, completion: nil)
+        }
+    
+    }
     //End Of Outlets-------------------------------------------------------------------------
     
    
@@ -43,7 +72,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         let uid = Auth.auth().currentUser?.uid
         Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: { (snapshot) in
-            print (snapshot)
+            
         }, withCancel: nil)
         
         

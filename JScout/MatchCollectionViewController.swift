@@ -12,7 +12,7 @@ import Firebase
 private let reuseIdentifier = "Cell"
 
 var numberOfMatchesInView = 0
-var matches = [String]()
+
 
 
 private let userID = Auth.auth().currentUser?.uid
@@ -36,7 +36,7 @@ class MatchCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        getNumberOfMatches()
+        fetchMatches2()
         
     }
     
@@ -46,6 +46,7 @@ class MatchCollectionViewController: UICollectionViewController {
     
     /// Outlets and Vars
     var countOfMatch = [match]()
+    var matches: [[String: Any]] = []
     
     
     /// End of Outlets And Vars
@@ -54,21 +55,21 @@ class MatchCollectionViewController: UICollectionViewController {
     
     
     //// FUNCTIONS -------------------------------------
-    func getNumberOfMatches() {
-        
-        thisUserRef.observe(.value, with: {  snapshot in
-            
-            var tempMatches = [String]()
-            for match in snapshot.children {
-                tempMatches.append((match as AnyObject).key)
-            }
-            DispatchQueue.main.async{
-                matches = tempMatches
-//                self.collectionView?.selectItem(at:IndexPath(item:1, section:0), animated:true, scrollPosition:.bottom)
-                self.collectionView!.reloadData()
-            }
-        })
-    }
+//    func getNumberOfMatches() {
+//
+//        thisUserRef.observe(.value, with: {  snapshot in
+//
+//            var tempMatches = [String]()
+//            for match in snapshot.children {
+//                tempMatches.append((match as AnyObject).key)
+//            }
+//            DispatchQueue.main.async{
+////                matches = tempMatches
+//
+//                self.collectionView!.reloadData()
+//            }
+//        })
+//    }
     
     
     func fetchMatches() {
@@ -128,6 +129,35 @@ class MatchCollectionViewController: UICollectionViewController {
         
     }
     
+    func fetchMatches2() {
+        
+        thisUserRef.observe(.value, with: { snapshot in // we walked from user to matches
+            
+            var matches: [[String: Any]] = [] // setup empty array of dictionaries
+            
+            for child in snapshot.children { // loop through children (matches)
+                
+                guard let matchSnapshot = child as? DataSnapshot, // cast child as snapshot
+                    var match = matchSnapshot.value as? [String: Any] else { // convert snapshot to dictionary
+                        continue // skip if it doesn't work
+                }
+                
+                // let's add the id to the dictionary
+                
+                let matchId = matchSnapshot.key // get the id
+                match["id"] = matchId
+                
+                matches.append(match) // add to array
+                print (matches)
+                self.collectionView!.reloadData()
+            }
+            self.collectionView!.reloadData()
+            
+            self.matches = matches
+            
+        })
+        
+    }
     
     
     
@@ -146,11 +176,6 @@ class MatchCollectionViewController: UICollectionViewController {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        let userID = Auth.auth().currentUser?.uid
-        let usersRef = Database.database().reference().child("users")
-        let thisUserRef = usersRef.child(userID!).child("matches")
-        
         
         
         return matches.count
@@ -173,9 +198,27 @@ class MatchCollectionViewController: UICollectionViewController {
        
         
         
+      let match = matches[indexPath.item]
         
-        print("You selected cell #\(indexPath.item)!")
+      
+        
+        
+        let matchVC = ViewController()
+        
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "matchVC") as? ViewController
+        {
+            vc.match = match
+            present(vc, animated: true, completion: nil)
+        }
+        
+        
+        
+//        print("this IS matches below --------")
+//        print (matches)
+//        print(matches)
     }
     
-}
+    }
+    
+
 

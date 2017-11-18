@@ -627,22 +627,23 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FLb-ZM-jpg">
                                 <rect key="frame" x="0.0" y="20" width="1024" height="75"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Real Madrid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sx-Zc-Cli">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Real Madrid" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sx-Zc-Cli">
                                         <rect key="frame" x="0.0" y="8" width="332" height="54"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="45"/>
-                                        <color key="textColor" red="0.95677179099999998" green="0.956928432" blue="0.9567385316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FC Barcelona" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSx-QI-5mC">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FC Barcelona" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSx-QI-5mC">
                                         <rect key="frame" x="693" y="8" width="332" height="54"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="332" id="IXb-Nb-NWe"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="45"/>
-                                        <color key="textColor" red="0.95677179099999998" green="0.956928432" blue="0.9567385316" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="fbC-DL-QqA">
-                                        <rect key="frame" x="467" y="10" width="90" height="54"/>
+                                        <rect key="frame" x="467" y="0.0" width="90" height="54"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8Y-G7-FfB">
                                                 <rect key="frame" x="0.0" y="0.0" width="25.5" height="54"/>
@@ -667,14 +668,47 @@
                                             <constraint firstItem="pvP-ye-gYe" firstAttribute="centerX" secondItem="fbC-DL-QqA" secondAttribute="centerX" id="4Zi-in-2fk"/>
                                         </constraints>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4D7-8s-UMh">
+                                        <rect key="frame" x="422" y="45.5" width="181" height="21.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zagabria" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZ3-Vl-JGr">
+                                                <rect key="frame" x="0.0" y="0.0" width="70.5" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="02.10.2012" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dyA-aF-cBa">
+                                                <rect key="frame" x="90.5" y="0.0" width="90.5" height="21.5"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="4D7-8s-UMh" firstAttribute="centerX" secondItem="fbC-DL-QqA" secondAttribute="centerX" id="3lP-Zh-9QF"/>
+                                    <constraint firstItem="xSx-QI-5mC" firstAttribute="top" secondItem="FLb-ZM-jpg" secondAttribute="topMargin" id="6S8-X1-Itk"/>
+                                    <constraint firstItem="6sx-Zc-Cli" firstAttribute="leading" secondItem="FLb-ZM-jpg" secondAttribute="leading" id="AcO-sb-YpT"/>
+                                    <constraint firstItem="xSx-QI-5mC" firstAttribute="leading" secondItem="4D7-8s-UMh" secondAttribute="trailing" constant="90" id="Chq-Vu-cX6"/>
+                                    <constraint firstAttribute="trailing" secondItem="xSx-QI-5mC" secondAttribute="trailing" constant="-1" id="KNl-If-o5z"/>
                                     <constraint firstItem="fbC-DL-QqA" firstAttribute="centerX" secondItem="FLb-ZM-jpg" secondAttribute="centerX" id="L6H-9L-NA9"/>
                                     <constraint firstItem="fbC-DL-QqA" firstAttribute="leading" secondItem="FLb-ZM-jpg" secondAttribute="leading" constant="467" id="OU7-vX-jST"/>
-                                    <constraint firstItem="fbC-DL-QqA" firstAttribute="centerY" secondItem="FLb-ZM-jpg" secondAttribute="centerY" id="TlN-8u-BED"/>
+                                    <constraint firstItem="fbC-DL-QqA" firstAttribute="centerY" secondItem="FLb-ZM-jpg" secondAttribute="centerY" constant="-10.5" id="TlN-8u-BED"/>
+                                    <constraint firstItem="6sx-Zc-Cli" firstAttribute="baseline" secondItem="xSx-QI-5mC" secondAttribute="baseline" id="axb-n6-3BA"/>
+                                    <constraint firstItem="4D7-8s-UMh" firstAttribute="bottom" secondItem="FLb-ZM-jpg" secondAttribute="bottomMargin" id="cMN-hU-NAL"/>
+                                    <constraint firstItem="4D7-8s-UMh" firstAttribute="leading" secondItem="6sx-Zc-Cli" secondAttribute="trailing" constant="90" id="cRE-wF-s3O"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V6g-6O-Jrk">
+                                <rect key="frame" x="489" y="493" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="backBtn:" destination="rFf-Zr-Ili" eventType="touchUpInside" id="D5Y-ys-hoe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -692,14 +726,17 @@
                         <viewLayoutGuide key="safeArea" id="WCq-MV-ZMr"/>
                     </view>
                     <connections>
+                        <outlet property="dateLabel" destination="dyA-aF-cBa" id="iiW-gQ-YDa"/>
+                        <outlet property="locationLabel" destination="fZ3-Vl-JGr" id="z8h-to-SiB"/>
                         <outlet property="tableViewA" destination="04s-XL-SYJ" id="BOK-Re-uUA"/>
                         <outlet property="tableViewB" destination="qaM-ip-5TD" id="WRP-uu-rOx"/>
                         <outlet property="teamANameLabel" destination="6sx-Zc-Cli" id="ZT6-kA-lSS"/>
+                        <outlet property="teamBNameLabel" destination="xSx-QI-5mC" id="OSh-hg-3hi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1f0-XO-J7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1382" y="-271"/>
+            <point key="canvasLocation" x="1381.640625" y="-271.09375"/>
         </scene>
     </scenes>
     <resources>
