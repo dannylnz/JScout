@@ -46,19 +46,10 @@ class PopUpViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let matchVC = segue.destination as! ViewController
         
-        matchVC.teamAname = teamATextField.text!
+       
     }
     
     
-    func presentMatchVC() {
-        
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "matchVC") as? ViewController
-        {
-            
-            present(vc, animated: true, completion: nil)
-        }
-    }
- 
     
     
     /// Functions
@@ -74,23 +65,32 @@ class PopUpViewController: UIViewController {
         let thisUserRef = usersRef.child(userID!).child("matches")
         
         
-        let newMatch = [
-            "team A Name": teamATextField.text! ,
+        var newMatch = [
+            "matchId" : "",
+            "team A Name": teamATextField.text!,
             "team B Name": teamBTextField.text!,
             "date": dateTextField.text!,
             "location": locationTextField.text!
             ] as [String : Any]
         
+       let thisUserMatchRef = thisUserRef.childByAutoId()
+        thisUserMatchRef.setValue(newMatch)
+        let key = thisUserMatchRef.key
+        newMatch["matchId"] = key
         
-        thisUserRef.childByAutoId().setValue(newMatch)
+        print(key)
         print("new Match added")
         
-        
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "matchVC") as? ViewController
+        {
+            vc.matchId = key
+            present(vc, animated: true, completion: nil)
+        }
        
         
      
         
-        presentMatchVC()
+      
         
         /// Set names and location, date to match view controller
         

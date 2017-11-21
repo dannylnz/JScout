@@ -11,9 +11,6 @@ import Firebase
 
 private let reuseIdentifier = "Cell"
 
-var numberOfMatchesInView = 0
-
-
 
 private let userID = Auth.auth().currentUser?.uid
 private let usersRef = Database.database().reference().child("users")
@@ -27,7 +24,7 @@ class MatchCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addNavigationBar()
-        
+     
         
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
@@ -35,8 +32,7 @@ class MatchCollectionViewController: UICollectionViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        fetchMatches2()
+        fetchMatches()
         
     }
     
@@ -71,18 +67,6 @@ class MatchCollectionViewController: UICollectionViewController {
 //        })
 //    }
     
-    
-    func fetchMatches() {
-        
-        let userID = Auth.auth().currentUser?.uid
-        let usersRef = Database.database().reference().child("users")
-        let thisUserRef = usersRef.child(userID!).child("matches")
-        
-        thisUserRef.observeSingleEvent(of: .value) { (snapshot) in
-            
-        }
-        
-    }
     
     
     func addNavigationBar() {
@@ -129,7 +113,7 @@ class MatchCollectionViewController: UICollectionViewController {
         
     }
     
-    func fetchMatches2() {
+    func fetchMatches() {
         
         thisUserRef.observe(.value, with: { snapshot in // we walked from user to matches
             
@@ -144,14 +128,17 @@ class MatchCollectionViewController: UICollectionViewController {
                 
                 // let's add the id to the dictionary
                 
-                let matchId = matchSnapshot.key // get the id
+                var matchId = matchSnapshot.key // get the id
                 match["id"] = matchId
                 
+                
                 matches.append(match) // add to array
-                print (matches)
+             
                 self.collectionView!.reloadData()
             }
             self.collectionView!.reloadData()
+            
+            
             
             self.matches = matches
             
@@ -196,26 +183,21 @@ class MatchCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         /// Handle The Taps
        
-        
-        
       let match = matches[indexPath.item]
-        
-      
-        
-        
         let matchVC = ViewController()
-        
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "matchVC") as? ViewController
         {
+            
+        
             vc.match = match
+            vc.matchId = match["id"] as? String
             present(vc, animated: true, completion: nil)
+            
         }
+     
         
         
         
-//        print("this IS matches below --------")
-//        print (matches)
-//        print(matches)
     }
     
     }

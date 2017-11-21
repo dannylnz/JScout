@@ -12,6 +12,8 @@
 		6467F8C81FBE4EDE002549A3 /* MatchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467F8C71FBE4EDE002549A3 /* MatchCollectionViewController.swift */; };
 		6467F8CB1FBE5E37002549A3 /* match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467F8CA1FBE5E37002549A3 /* match.swift */; };
 		6467F8CD1FBE6A19002549A3 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6467F8CC1FBE6A19002549A3 /* CollectionViewCell.swift */; };
+		64A15D081FC3250200B87E9F /* giocatore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A15D071FC3250200B87E9F /* giocatore.swift */; };
+		64A15D0A1FC326CB00B87E9F /* PlayerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A15D091FC326CB00B87E9F /* PlayerDetail.swift */; };
 		64F5187C1FBCFBFA004AEFFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F5187B1FBCFBFA004AEFFE /* AppDelegate.swift */; };
 		64F5187E1FBCFBFA004AEFFE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F5187D1FBCFBFA004AEFFE /* ViewController.swift */; };
 		64F518831FBCFBFA004AEFFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64F518821FBCFBFA004AEFFE /* Assets.xcassets */; };
@@ -33,6 +35,8 @@
 		6467F8CA1FBE5E37002549A3 /* match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = match.swift; sourceTree = "<group>"; };
 		6467F8CC1FBE6A19002549A3 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		6467F8CF1FBE6E75002549A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "/Users/Daniele/Documents/Documenti - MacBook Air di Daniele/XCode/JScout/JScout/Info.plist"; sourceTree = "<absolute>"; };
+		64A15D071FC3250200B87E9F /* giocatore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = giocatore.swift; sourceTree = "<group>"; };
+		64A15D091FC326CB00B87E9F /* PlayerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDetail.swift; sourceTree = "<group>"; };
 		64F518781FBCFBFA004AEFFE /* JScout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JScout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64F5187B1FBCFBFA004AEFFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64F5187D1FBCFBFA004AEFFE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				6467F8CA1FBE5E37002549A3 /* match.swift */,
+				64A15D071FC3250200B87E9F /* giocatore.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 				6467F8CE1FBE6DF3002549A3 /* Collection View  */,
 				64267B191FBDEE8A009B2A6A /* TableView */,
 				64F5188F1FBD028A004AEFFE /* Sign Up and Login */,
+				64A15D091FC326CB00B87E9F /* PlayerDetail.swift */,
 			);
 			path = JScout;
 			sourceTree = "<group>";
@@ -274,9 +280,11 @@
 				6467F8C81FBE4EDE002549A3 /* MatchCollectionViewController.swift in Sources */,
 				64267B1B1FBDEEB8009B2A6A /* TableViewCellFile.swift in Sources */,
 				6467F8CB1FBE5E37002549A3 /* match.swift in Sources */,
+				64A15D0A1FC326CB00B87E9F /* PlayerDetail.swift in Sources */,
 				64F518951FBD04F1004AEFFE /* SignUpViewController.swift in Sources */,
 				642E35411FBEC8F1004AD3B3 /* PopUpViewController.swift in Sources */,
 				64F5187C1FBCFBFA004AEFFE /* AppDelegate.swift in Sources */,
+				64A15D081FC3250200B87E9F /* giocatore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
