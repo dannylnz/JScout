@@ -73,10 +73,11 @@ class MatchCollectionViewController: UICollectionViewController {
         
         let height: CGFloat = 75
         let navbar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height))
-        navbar.backgroundColor = UIColor.white
+        navbar.barStyle = UIBarStyle.black
+        navbar.tintColor = UIColor.white
         navbar.delegate = self as? UINavigationBarDelegate
         let navItem = UINavigationItem()
-        navItem.title = "Title"
+        navItem.title = "Match Collection"
         navItem.leftBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOut))
         navItem.rightBarButtonItem = UIBarButtonItem(title: "Add new match", style: .plain, target: self, action: #selector(addNewMatch))
         navbar.items = [navItem]

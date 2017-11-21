@@ -74,9 +74,10 @@ class PopUpViewController: UIViewController {
             ] as [String : Any]
         
        let thisUserMatchRef = thisUserRef.childByAutoId()
-        thisUserMatchRef.setValue(newMatch)
         let key = thisUserMatchRef.key
         newMatch["matchId"] = key
+        thisUserMatchRef.setValue(newMatch)
+        
         
         print(key)
         print("new Match added")

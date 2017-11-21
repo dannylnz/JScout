@@ -218,19 +218,21 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             }
     
             }
-        func createNewPlayerinB() {
-    
+    func createNewPlayerinB() {
         
         let userID = Auth.auth().currentUser?.uid
         let usersRef = Database.database().reference().child("users")
         let thisUserRef = usersRef.child(userID!).child("matches")
-        let thisUserRefMatch = thisUserRef.child(matchId!)
+        let thisUserMatchRef =  thisUserRef.child(matchId!).childByAutoId()
+        
         
         if (textFieldB.text?.isEmpty)! {
             print("Please add a value")
         } else {
             
-            let newPlayer = [
+            
+            var newPlayer = [
+                "playerId": "",
                 "name": textFieldB.text!,
                 "date of birth": "",
                 "position": "",
@@ -238,8 +240,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 "nationality": ""
                 ] as [String : Any]
             
-            thisUserRefMatch.childByAutoId().setValue(newPlayer)
+            
+            let key = thisUserMatchRef.key
+            newPlayer["playerId"] = key
+            thisUserMatchRef.setValue(newPlayer)
             playersB.append(newPlayer)
+            
             
             let indexPath = IndexPath(row: playersB.count - 1, section: 0)
             
@@ -249,12 +255,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             textFieldB.text = ""
             view.endEditing(true)
-    
-            print("new player added in Team B")
+            
+            
+            print("new player added in team A")
             
         }
         
-        }
+    }
     
     
     
@@ -293,6 +300,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellA", for: indexPath) as! TableViewCellA
             
             cell.textLabel?.textColor = UIColor.white
+            cell.backgroundColor = UIColor.darkGray
             cell.TableViewAName?.text = textFieldA.text
             return cell
             
@@ -300,6 +308,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellB", for: indexPath) as! TableViewCellB
             
             cell.textLabel?.textColor = UIColor.white
+            cell.backgroundColor = UIColor.darkGray
             cell.TableViewBName?.text = textFieldB.text
             return cell
             
