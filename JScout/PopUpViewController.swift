@@ -16,8 +16,6 @@ let matchVC = ViewController()
 class PopUpViewController: UIViewController {
 
     
-    
-    
     @IBOutlet weak var popUpLayer: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()

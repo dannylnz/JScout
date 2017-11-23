@@ -85,8 +85,6 @@ class MatchCollectionViewController: UICollectionViewController {
         collectionView?.frame = CGRect(x: 0, y: height, width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height - height))
     }
     
-    
-    
     func presentPopUp() {
         
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PopUpVC") as? PopUpViewController
