@@ -31,6 +31,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         teamBNameLabel.text = match["team B Name"] as? String
         // Design of text Fields
         designTextFields()
+        populateTableViewAFromFirebase()
+        populateTableViewBFromFirebase()
 
     }
     
@@ -171,8 +173,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             let userID = Auth.auth().currentUser?.uid
             let usersRef = Database.database().reference().child("users")
             let thisUserRef = usersRef.child(userID!).child("matches")
-            let thisUserMatchRef =  thisUserRef.child(matchId!).childByAutoId()
-
+            let thisUserMatchRef =  thisUserRef.child(matchId!).child("teamAPlayers").childByAutoId()
+            
             
             if (textFieldA.text?.isEmpty)! {
                 print("Please add a value")
@@ -188,21 +190,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 "nationality": ""
                 ] as [String : Any]
                 
-//
-//                let thisUserMatchRef = thisUserRef.childByAutoId()
-//                thisUserMatchRef.setValue(newMatch)
-//                let key = thisUserMatchRef.key
-//                newMatch["matchId"] = key
-//                // TO GET VALUE EXACT TO Playerid
-                // to add the teams folders
+
                 
-//
+                ///Get the key of the player and set it
                 let key = thisUserMatchRef.key
                 newPlayer["playerId"] = key
+                
+               
+                /// Create new player and append it to playersA[dict]
                 thisUserMatchRef.setValue(newPlayer)
                 playersA.append(newPlayer)
                 
-                
+                /// add to the tableview
                 let indexPath = IndexPath(row: playersA.count - 1, section: 0)
                 
                 tableViewA.beginUpdates()
@@ -223,7 +222,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let userID = Auth.auth().currentUser?.uid
         let usersRef = Database.database().reference().child("users")
         let thisUserRef = usersRef.child(userID!).child("matches")
-        let thisUserMatchRef =  thisUserRef.child(matchId!).childByAutoId()
+        let thisUserMatchRef =  thisUserRef.child(matchId!).child("teamBPlayers").childByAutoId()
         
         
         if (textFieldB.text?.isEmpty)! {
@@ -257,13 +256,72 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             view.endEditing(true)
             
             
-            print("new player added in team A")
+            print("new player added in team B")
             
         }
         
     }
-    
-    
+  
+    func populateTableViewAFromFirebase() {
+        
+        let teamAPlayersList =  thisUserRef.child(matchId!).child("teamAPlayers")
+        
+        ///retrieve all data from firebase
+        teamAPlayersList.observe(.value, with: { snapshot in // we walked from user to matches
+            
+            var teamAPlayersList: [[String: Any]] = [] 
+            
+            for child in snapshot.children { // loop through children (players)
+                
+                guard let playerSnapshot = child as? DataSnapshot, // cast child as snapshot
+                    var player = playerSnapshot.value as? [String: Any] else { // convert snapshot to dictionary
+                        continue // skip if it doesn't work
+                }
+                
+                teamAPlayersList.append(player)
+                self.tableViewA.reloadData()
+                print("this is team A player Snapshot of match")
+                print(playerSnapshot)
+                print("this is players A array Snapshot")
+                print(self.playersA)
+            }
+            self.playersA = teamAPlayersList
+            
+            self.tableViewA.reloadData()
+        })
+        
+        
+    }
+    func populateTableViewBFromFirebase() {
+        
+        let teamBPlayersList =  thisUserRef.child(matchId!).child("teamBPlayers")
+        
+        ///retrieve all data from firebase
+        teamBPlayersList.observe(.value, with: { snapshot in // we walked from user to matches
+            
+            var teamBPlayersList: [[String: Any]] = []
+            
+            for child in snapshot.children { // loop through children (players)
+                
+                guard let playerSnapshot = child as? DataSnapshot, // cast child as snapshot
+                    var player = playerSnapshot.value as? [String: Any] else { // convert snapshot to dictionary
+                        continue // skip if it doesn't work
+                }
+                
+                teamBPlayersList.append(player)
+                self.tableViewB.reloadData()
+                print("this is team A player Snapshot of match")
+                print(playerSnapshot)
+                print("this is players A array Snapshot")
+                print(self.playersB)
+            }
+            self.playersB = teamBPlayersList
+            
+            self.tableViewB.reloadData()
+        })
+        
+        
+    }
     
     
     // End of Func -----------------------------------------------------------------------
@@ -301,7 +359,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             cell.textLabel?.textColor = UIColor.white
             cell.backgroundColor = UIColor.darkGray
-            cell.TableViewAName?.text = textFieldA.text
+            cell.TableViewAName?.text = playersA[indexPath.row]["name"] as? String
             return cell
             
         }else {
@@ -309,7 +367,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             cell.textLabel?.textColor = UIColor.white
             cell.backgroundColor = UIColor.darkGray
-            cell.TableViewBName?.text = textFieldB.text
+            cell.TableViewBName?.text = playersB[indexPath.row]["name"] as? String
             return cell
             
         }

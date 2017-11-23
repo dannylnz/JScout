@@ -51,22 +51,6 @@ class MatchCollectionViewController: UICollectionViewController {
     
     
     //// FUNCTIONS -------------------------------------
-//    func getNumberOfMatches() {
-//
-//        thisUserRef.observe(.value, with: {  snapshot in
-//
-//            var tempMatches = [String]()
-//            for match in snapshot.children {
-//                tempMatches.append((match as AnyObject).key)
-//            }
-//            DispatchQueue.main.async{
-////                matches = tempMatches
-//
-//                self.collectionView!.reloadData()
-//            }
-//        })
-//    }
-    
     
     
     func addNavigationBar() {
@@ -130,14 +114,11 @@ class MatchCollectionViewController: UICollectionViewController {
                 var matchId = matchSnapshot.key // get the id
                 match["id"] = matchId
                 
-                
                 matches.append(match) // add to array
              
                 self.collectionView!.reloadData()
             }
             self.collectionView!.reloadData()
-            
-            
             
             self.matches = matches
             
@@ -145,13 +126,9 @@ class MatchCollectionViewController: UICollectionViewController {
         
     }
     
-    
-    
     //// END OF FUNCTIONS -------------------------------------
     
     
-    
-   
     
     // MARK: UICollectionViewDataSource
     

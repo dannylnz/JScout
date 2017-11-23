@@ -8,8 +8,7 @@
 
 import UIKit
 import Firebase
-
-
+import FirebaseStorage
 
 
 class SignupViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
