@@ -53,7 +53,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
             
             
             if let user = user {
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC")
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MatchCollectionVC")
                 self.present(vc, animated: true, completion: nil)
                 
             }
