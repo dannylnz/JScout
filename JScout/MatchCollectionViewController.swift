@@ -10,30 +10,24 @@ import UIKit
 import Firebase
 
 private let reuseIdentifier = "Cell"
-
-
 private let userID = Auth.auth().currentUser?.uid
 private let usersRef = Database.database().reference().child("users")
 private let thisUserRef = usersRef.child(userID!).child("matches")
 
 class MatchCollectionViewController: UICollectionViewController {
     
-    
-    
-    /// ViewDidLoad -----------------------------------------
+// ViewDidLoad -----------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-        addNavigationBar()
-     
-        
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionViewColor()
+        navControllerDesign()
+//        addNavigationBar()
+        fetchMatches()
     }
     
-    
     override func viewWillAppear(_ animated: Bool) {
+        //Try to remove
         fetchMatches()
-        
     }
     
     
@@ -44,14 +38,30 @@ class MatchCollectionViewController: UICollectionViewController {
     var countOfMatch = [match]()
     var matches: [[String: Any]] = []
     
+    @IBOutlet weak var teamANameCellLabel: UILabel!
+    @IBOutlet weak var teamBNameCellLabel: UILabel!
     
     /// End of Outlets And Vars
     
+    /// Action Button
     
+    
+    @IBAction func addNewMatchBtn(_ sender: Any) {
+        addNewMatch()
+    }
+    
+    
+    /// End of Action Button
     
     
     //// FUNCTIONS -------------------------------------
     
+    
+    func navControllerDesign() {
+        navigationController?.navigationBar.barTintColor = UIColor.black
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
+        
+    }
     
     func addNavigationBar() {
         
@@ -67,6 +77,12 @@ class MatchCollectionViewController: UICollectionViewController {
         navbar.items = [navItem]
         view.addSubview(navbar)
         collectionView?.frame = CGRect(x: 0, y: height, width: UIScreen.main.bounds.width, height: (UIScreen.main.bounds.height - height))
+    }
+
+    func collectionViewColor() {
+        
+        collectionView?.backgroundColor = UIColor.black
+        
     }
     
     func presentPopUp() {
@@ -119,7 +135,8 @@ class MatchCollectionViewController: UICollectionViewController {
                 self.collectionView!.reloadData()
             }
             self.collectionView!.reloadData()
-            
+            print ("this is matches")
+            print(matches)
             self.matches = matches
             
         })
@@ -145,12 +162,21 @@ class MatchCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
+        
         
         // Configure the cell
-        cell.backgroundColor = UIColor.black
-        cell.layer.borderWidth = 1
+        
+        cell.teamANameCellLabel.text = matches[indexPath.row]["team A Name"] as? String
+        cell.teamBNameCellLabel.text = matches[indexPath.row]["team B Name"] as? String
+//        cell.dateLabel.text = matches[indexPath.row]["date"] as? String
+//        cell.locationLabel.text = matches[indexPath.row]["location"] as? String
+        cell.backgroundColor = UIColor.darkGray
+        cell.layer.borderWidth = 5
+        cell.layer.borderColor = UIColor.yellow.cgColor
         cell.layer.cornerRadius = 8
+        
         
         
         return cell

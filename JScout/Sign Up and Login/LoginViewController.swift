@@ -9,25 +9,26 @@
 import UIKit
 import Firebase
 
-class LoginViewController: UIViewController {
 
+class LoginViewController: UIViewController,UITextFieldDelegate{
+    // OUTLET VAR LET
+    
+    
 
     @IBOutlet weak var emailField: UITextField!
-    
     @IBOutlet weak var pwField: UITextField!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
+
     }
     
+    
+    /// FUNCTIONS
     
     @IBAction func loginPressed(_ sender: Any) {
         
         guard emailField.text != "", pwField.text != "" else { return }
-        
         Auth.auth().signIn(withEmail: emailField.text! , password: pwField.text!, completion: { (user, error) in
             if let error = error {
                 print(error.localizedDescription)
@@ -39,7 +40,7 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            let ref = Database.database().reference(fromURL: "https://jscout-4a0bf.firebaseio.com/")
+            let ref = Database.database().reference(fromURL: "https://joscoutingsystem.firebaseio.com/")
             let usersReference = ref.child("users").child(uid)
             let values = ["email": self.emailField.text!]
             usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
@@ -52,7 +53,7 @@ class LoginViewController: UIViewController {
             
             
             if let user = user {
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "initialView")
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "homeVC")
                 self.present(vc, animated: true, completion: nil)
                 
             }
@@ -62,5 +63,9 @@ class LoginViewController: UIViewController {
         })
         
     }
-
+    
+    
+    
 }
+
+

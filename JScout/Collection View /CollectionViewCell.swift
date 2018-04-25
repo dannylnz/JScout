@@ -10,4 +10,6 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var teamANameCellLabel: UILabel!
+    @IBOutlet weak var teamBNameCellLabel: UILabel!
 }

@@ -38,7 +38,7 @@ class SignupViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         picker.delegate = self
-        let storage = Storage.storage().reference(forURL: "gs://jscout-4a0bf.appspot.com/")
+        let storage = Storage.storage().reference(forURL: "gs://joscoutingsystem.appspot.com")
         ref = Database.database().reference()
         userStorage = storage.child("users")
         

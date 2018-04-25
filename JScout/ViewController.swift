@@ -18,17 +18,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     // ViewDidLoad - WillAppear-----------------------------------------------------------------------------
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         print(matchId!)
+        populateMatch()
         
-        // date
-        dateLabel.text = match["date"] as? String
-        // location
-        locationLabel.text = match["location"] as? String
-        // team A Name
-        teamANameLabel.text = match["team A Name"] as? String
-        // team B Name
-        teamBNameLabel.text = match["team B Name"] as? String
         // Design of text Fields
         designTextFields()
         populateTableViewAFromFirebase()
@@ -69,7 +61,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     @IBAction func backBtn(_ sender: Any) {
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "initialView") as? MatchCollectionViewController
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InitialTabBarView") as? MatchCollectionViewController
         {
             
             present(vc, animated: true, completion: nil)
@@ -100,36 +92,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }, withCancel: nil)
         
     }
-
-    func fetchPlayersInTeamA() {
-        
-        thisUserRef.observe(.value, with: { snapshot in // we walked from user to matches
-            
-            var playersA: [[String: Any]] = [] // setup empty array of dictionaries
-            
-            for child in snapshot.children { // loop through children (matches)
-                
-                guard let playerASnapshot = child as? DataSnapshot, // cast child as snapshot
-                    var playerA = playerASnapshot.value as? [String: Any] else { // convert snapshot to dictionary
-                        continue // skip if it doesn't work
-                }
-                
-                // let's add the id to the dictionary
-                
-                let playerAId = playerASnapshot.key // get the id
-                playerA["id"] = playerAId
-                
-                playersA.append(playerA) // add to array
-               
-                self.tableViewA!.reloadData()
-            }
-            self.tableViewA!.reloadData()
-            
-            self.playersA = playersA
-            
-        })
-    }
-    
     
     func designTextFields() {
         
@@ -324,12 +286,37 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     
+    func populateMatch() {
+        
+        let populateRef = thisUserRef.child(matchId!)
+        
+        populateRef.observeSingleEvent(of: .value) { (snapshot) in
+            
+            var matchSpecs = snapshot.value as! [String: Any]
+            let nameOfTeamA = matchSpecs["team A Name"] as! String
+            self.teamANameLabel.text = nameOfTeamA
+            let nameOfTeamB = matchSpecs["team B Name"] as! String
+            self.teamBNameLabel.text = nameOfTeamB
+            let location = matchSpecs["location"] as! String
+            self.locationLabel.text = location
+            let date = matchSpecs["date"] as! String
+            self.dateLabel.text = date
+            
+            
+            print("this is the snapshot of populate match")
+            print(snapshot)
+        }
+            
+            //read the user data from the snapshot and do whatever with it
+        
+        
+        
+    }
+    
+    
     // End of Func -----------------------------------------------------------------------
     
-    
-    
-    
-    
+
     // Table Views Settings---------------------------------------------------------------
     // TABLE VIEW LEFT == tableViewA,TableViewAName(Label Of Table view cell A),TableViewCellA (Cell Class)
     // TABLE VIEW RIGHT == tableviewB,TableViewBName(Label Of Table view cell B),TableViewCellB (Cell Class)
@@ -383,20 +370,29 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         if (tableView == tableViewA)
         {
             if (editingStyle == .delete){
+                let teamAPlayersList =  thisUserRef.child(matchId!).child("teamAPlayers")
+                let playerId = playersA[indexPath.row]["playerId"] as? String
                 
+                /// remove from playerArray
                 playersA.remove(at: indexPath.row)
+                /// remove also from DB
+                teamAPlayersList.child(playerId!).removeValue()
                 tableViewA.beginUpdates()
                 tableViewA.deleteRows(at: [indexPath], with: .automatic)
                 tableViewA.endUpdates()
                 
-                 /// remove also from DB
+                
             }
             
         } else if (tableView == tableViewB)
         {
             if (editingStyle == .delete){
-                
+                let teamBPlayersList =  thisUserRef.child(matchId!).child("teamBPlayers")
+                let playerId = playersB[indexPath.row]["playerId"] as? String
+                /// remove from playerArray
                 playersB.remove(at: indexPath.row)
+                /// remove also from DB
+                teamBPlayersList.child(playerId!).removeValue()
                 tableViewB.beginUpdates()
                 tableViewB.deleteRows(at: [indexPath], with: .automatic)
                 tableViewB.endUpdates()
@@ -412,8 +408,43 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }
         
         
+        
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if (tableView == tableViewA){
+            
+            let teamAPlayersList =  thisUserRef.child(matchId!).child("teamAPlayers")
+            let playerId = playersA[indexPath.row]["playerId"] as? String
+            let playerDetailsVC = PlayerDetail()
+            
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "playerDetail") as? PlayerDetail
+            {
+                vc.playerName = playersA[indexPath.row]["name"] as? String
+                vc.matchId = matchId!
+                
+                print ("this is players A in VC")
+                print (vc.playersA)
+                
+                vc.playerId = playersA[indexPath.row]["playerId"] as? String
+                present(vc, animated: true, completion: nil)
+            
+            }
+            
+        }
+        else if (tableView == tableViewB) {
+            
+            
+        } else {
+            return
+            
+        }
+        
+        
+        
+        
+    }
     /// End of .Delete TableViewCells
     
     
