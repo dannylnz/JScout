@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SkyFloatingLabelTextField
 
 
 class LoginViewController: UIViewController,UITextFieldDelegate{
@@ -15,8 +16,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     
     
 
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var pwField: UITextField!
+    @IBOutlet weak var emailField: SkyFloatingLabelTextField!
+    @IBOutlet weak var pwField: SkyFloatingLabelTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
