@@ -54,7 +54,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
             
             
             if let user = user {
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MatchCollectionVC")
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabbarIdentifier")
                 self.present(vc, animated: true, completion: nil)
                 
             }
@@ -66,6 +66,20 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
     }
     
     
+    
+}
+
+extension UIViewController {
+    func hideNavigationBar(){
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+    }
+    
+    func showNavigationBar() {
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     
 }
 
