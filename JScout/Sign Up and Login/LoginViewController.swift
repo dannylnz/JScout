@@ -54,7 +54,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate{
             
             
             if let user = user {
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabbarIdentifier")
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabbarIdentifier") as! UITabBarController
                 self.present(vc, animated: true, completion: nil)
                 
             }
